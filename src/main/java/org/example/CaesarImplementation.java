@@ -3,7 +3,7 @@ package main.java.org.example;
 public class CaesarImplementation {
 
   private final String ALPHABET_UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  private final String ALPHABET_LOWER = "abcdefghijklmnopqrstuvwyyz";
+  private final String ALPHABET_LOWER = "abcdefghijklmnopqrstuvwxyz";
 
   /**
    * creates a message encoded with Caesar Cypher.
@@ -19,7 +19,6 @@ public class CaesarImplementation {
     for (int i = 0; i < message.length(); i++) {
       Character c = message.charAt(i);
       String cAsString = c.toString();
-      System.out.println(cAsString);
       int indexInAlphabet;
       boolean upperCase;
       if (Character.isUpperCase(c)) {
@@ -29,20 +28,20 @@ public class CaesarImplementation {
         upperCase = false;
         indexInAlphabet = ALPHABET_LOWER.indexOf(cAsString);
       }
-      System.out.println("index for " + cAsString + " in Alphabet: " + indexInAlphabet);
+      //System.out.println("index for " + cAsString + " in Alphabet: " + indexInAlphabet);
       if (indexInAlphabet < 0) {
         encryptedMessage.append(cAsString);
       } else {
         String encodedChar = String.valueOf(encodedAlphabet.charAt(indexInAlphabet));
-        System.out.println("Encode " + cAsString + " to " + encodedChar);
+        //System.out.println("Encode " + cAsString + " to " + encodedChar);
         if (!upperCase) {
           encodedChar = encodedChar.toLowerCase();
         }
         encryptedMessage.append(encodedChar);
       }
     }
-    System.out.println("Message '" + message + "' looks encrypted like this: ");
-    System.out.println(encryptedMessage);
+    //System.out.println("Message '" + message + "' looks encrypted like this: ");
+    //System.out.println(encryptedMessage);
     return encryptedMessage;
   }
 
@@ -72,7 +71,7 @@ public class CaesarImplementation {
         upperCase = false;
         indexInAlphabet = ALPHABET_LOWER.indexOf(cAsString);
       }
-      System.out.println("index for " + cAsString + " in Alphabet: " + indexInAlphabet);
+      //System.out.println("index for " + cAsString + " in Alphabet: " + indexInAlphabet);
       if (indexInAlphabet < 0) {
         encryptedMessage.append(cAsString);
       } else {
@@ -82,15 +81,15 @@ public class CaesarImplementation {
         } else {
           encodedChar = String.valueOf(encodedAlphabet2.charAt(indexInAlphabet));
         }
-        System.out.println("Encode " + cAsString + " to " + encodedChar);
+        //System.out.println("Encode " + cAsString + " to " + encodedChar);
         if (!upperCase) {
           encodedChar = encodedChar.toLowerCase();
         }
         encryptedMessage.append(encodedChar);
       }
     }
-    System.out.println("Message '" + message + "' looks encrypted like this: ");
-    System.out.println(encryptedMessage);
+    //System.out.println("Message '" + message + "' looks encrypted like this: ");
+    //System.out.println(encryptedMessage);
     return encryptedMessage;
   }
 
@@ -108,7 +107,7 @@ public class CaesarImplementation {
     String encodedAlphabet = "";
     for (int i = 0; i < ALPHABET_UPPER.length(); i++) {
       int index;
-      System.out.println("i: " + i);
+      //System.out.println("i: " + i);
       if (leftShift) {
         index = i - key;
         if (index < 0) {
@@ -123,7 +122,7 @@ public class CaesarImplementation {
       //System.out.println("index: " + index + " in Alphabet has char: " + ALPHABET_UPPER.charAt(index));
       encodedAlphabet = encodedAlphabet + String.valueOf(ALPHABET_UPPER.charAt(index));
     }
-    System.out.println("Encoded Alphabet with key " + key + " and leftShift is " + leftShift + ".");
+    //System.out.println("Encoded Alphabet with key " + key + " and leftShift is " + leftShift + ".");
     System.out.println(encodedAlphabet);
     return encodedAlphabet;
 
