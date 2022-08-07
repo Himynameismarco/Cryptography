@@ -132,4 +132,11 @@ public class CaesarImplementation {
     return "";
   }
 
+  public String getALPHABET_UPPER() {
+    return ALPHABET_UPPER;
+  }
+
+  public String getALPHABET_LOWER() {
+    return ALPHABET_LOWER;
+  }
 }
