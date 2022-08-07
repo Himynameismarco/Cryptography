@@ -15,7 +15,8 @@ public class CryptographyMain {
     // true).toString());
     // System.out.println(caesearBreaking.findMostCommonWordLength("Hi my name is Marco!"));
     // System.out.println(caesearBreaking.findMostCommonWordLength(caesearBreaking.readFileToString("lib/romeo.txt")));
-    System.out.println(caesearBreaking.getIndexOfMostFrequentLetter("Hi my name is Marco!"));
+    System.out.println(caesearBreaking.getIndexOfMostFrequentLetter(caesearBreaking.readFileToString("lib/romeo.txt")));
+    System.out.println(caesearBreaking.breakCaesarBasedOnFrequentLetters("ffffffff", 0));
   }
 }
 

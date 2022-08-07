@@ -43,10 +43,10 @@ public class CaesearBreaking {
    * @return the index.
    */
   public int getIndexOfMostFrequentLetter(String encryptedMessage) {
-    ArrayList<Integer> lengthList = new ArrayList<>();
+    ArrayList<Integer> frequencyList = new ArrayList<>();
     //making a List with 30 0s
     for (int i = 0; i < 27; i++) {
-      lengthList.add(0);
+      frequencyList.add(0);
     }
     String[] wordList = encryptedMessage.split("\\W+");
     String currentWord = "";
@@ -59,23 +59,54 @@ public class CaesearBreaking {
       for (int j = 0; j < currentWord.length(); j++) {
         currentIndexOfLetter = alphabet.indexOf(currentWord.charAt(j));
         if (currentIndexOfLetter > 0) {
-          lengthList.set(currentIndexOfLetter, lengthList.get(currentIndexOfLetter) + 1);
+          frequencyList.set(currentIndexOfLetter, frequencyList.get(currentIndexOfLetter) + 1);
         }
       }
     }
 
     for (int i = 0; i < alphabet.length(); i++) {
-        System.out.println(lengthList.get(i) + " words of letter " + alphabet.charAt(i) + ".");
+        System.out.println(frequencyList.get(i) + " times letter " + alphabet.charAt(i) + ".");
     }
 
-    return 0;
+    int findMax = 0;
+    int counter = 0;
+    int maxIndex = 0;
+    for (int count : frequencyList) {
+      if (count > findMax) {
+        findMax = count;
+        maxIndex = counter;
+      }
+      counter++;
+    }
+
+    System.out.println("The index of the most used letter is " + maxIndex + ". It is "
+        + alphabet.charAt(maxIndex) + ".");
+    return maxIndex;
 
   }
 
   public String breakCaesarBasedOnFrequentLetters(String encryptedMessage, int letterRank) {
-
-    return new String();
+    int mostCommonIndex = getIndexOfMostFrequentLetter(encryptedMessage);
+    //index of the 'letterrank' most frequent letter, if letterrank is 0 it is 'e'
+    CaesarImplementation caesarImplementation = new CaesarImplementation();
+    Character characterToBaseEncryptionOn = ALPHABET_ORDERED_AFTER_FREQUENCY.charAt(letterRank);
+    String alphabet = caesarImplementation.getALPHABET_UPPER();
+    int indexOfCharInNormalAlphabet = alphabet.indexOf(characterToBaseEncryptionOn);
+    int delta = 0;
+    boolean moveLeft;
+    if (indexOfCharInNormalAlphabet > mostCommonIndex) {
+      moveLeft = false;
+      delta = indexOfCharInNormalAlphabet - mostCommonIndex;
+    } else {
+      moveLeft = true;
+      delta = mostCommonIndex - indexOfCharInNormalAlphabet;
+    }
+    System.out.println("delta is: " + delta);
+    String solution = caesarImplementation.makeCaesar(encryptedMessage, delta, moveLeft).toString();
+    return solution;
   }
+
+
 
   /**
    * prints out the number of times a word length was in a given String.
@@ -108,14 +139,12 @@ public class CaesearBreaking {
     int maxIndex = 0;
     int counter = 0;
     for (int count : lengthList) {
-      counter++;
       if (count > findMax) {
         findMax = count;
         maxIndex = counter;
       }
+      counter++;
     }
-    // Because maxIndex starts with 0;
-    maxIndex--;
     System.out.println("The length of the word most commonly used was: " + maxIndex);
     return maxIndex;
   }
