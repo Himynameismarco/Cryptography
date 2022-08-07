@@ -14,7 +14,7 @@ public class CasearBreaking {
       currentVersion.append(caesarImplementation.makeCaesar(encryptedMessage, i, true));
       System.out.println(currentVersion);
       allCombinations.add(currentVersion);
-      currentVersion.setLength(0);
+      currentVersion = new StringBuilder();
     }
     return allCombinations;
   }
