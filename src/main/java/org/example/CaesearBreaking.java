@@ -11,9 +11,6 @@ public class CaesearBreaking {
   private final String ALPHABET_UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   private final String ALPHABET_LOWER = "abcdefghijklmnopqrstuvwxyz";
   private final String ALPHABET_ORDERED_AFTER_FREQUENCY = "ETAINOSHRDLUCMFWYGPBVKQJXZ";
-  private int key1;
-  private int key2;
-  private boolean leftShift;
 
   public CaesearBreaking() {
   }
@@ -33,16 +30,11 @@ public class CaesearBreaking {
       currentVersion.append("Key ").append(i).append(": ");
       currentVersion.append(
           caesarImplementationOneKey.makeCaesar(encryptedMessage.toString()));
-      System.out.println(currentVersion);
+      //System.out.println(currentVersion);
       allCombinations.add(currentVersion);
       currentVersion = new StringBuilder();
     }
     return allCombinations;
-  }
-
-  //Counting letters that most occur - in English most used letter will be 'e'
-  public int getKeyToSetToMostCommonLetter() {
-    return 0;
   }
 
   /**
@@ -61,7 +53,7 @@ public class CaesearBreaking {
     String currentWord = "";
     int currentIndexOfLetter;
     for (int i = 0; i < wordList.length; i++) {
-      System.out.println(wordList[i]);
+      //System.out.println(wordList[i]);
       currentWord = wordList[i];
       for (int j = 0; j < currentWord.length(); j++) {
         currentIndexOfLetter = ALPHABET_LOWER.indexOf(currentWord.charAt(j));
@@ -72,7 +64,7 @@ public class CaesearBreaking {
     }
 
     for (int i = 0; i < ALPHABET_LOWER.length(); i++) {
-        System.out.println(frequencyList.get(i) + " times letter " + ALPHABET_LOWER.charAt(i) + ".");
+        //System.out.println(frequencyList.get(i) + " times letter " + ALPHABET_LOWER.charAt(i) + ".");
     }
 
     int findMax = 0;
@@ -98,7 +90,7 @@ public class CaesearBreaking {
    *
    * @param encryptedMessage the message to be decrypted.
    * @param letterRank the letter rank, use 0 as default, it is 'e', the most used letter in the
-   *                   english language.
+   *                   english language --> see ALPHABET_ORDERED_AFTER_FREQUENCY
    * @return the message decrypted.
    */
   public String breakCaesarBasedOnFrequentLetters(String encryptedMessage, int letterRank) {
@@ -147,7 +139,7 @@ public class CaesearBreaking {
     }
     for (int i = 1; i < lengthList.size(); i++) {
       if (lengthList.get(i) != 0) {
-        System.out.println(lengthList.get(i) + " words of length " + i + ".");
+        //System.out.println(lengthList.get(i) + " words of length " + i + ".");
       }
     }
     int findMax = 0;
@@ -164,6 +156,13 @@ public class CaesearBreaking {
     return maxIndex;
   }
 
+  /**
+   * reads a given file to a String.
+   *
+   * @param pathAsString path to the string in the file strucutre.
+   * @return the file as a String
+   * @throws IOException you know that
+   */
   public String readFileToString(String pathAsString) throws IOException {
     Path path = Path.of(pathAsString);
     String content = Files.readString(path, StandardCharsets.US_ASCII);
@@ -171,7 +170,14 @@ public class CaesearBreaking {
     return content;
   }
 
-  public String halfOfString(String encryptedMessage, int half) {
+  /**
+   * Splitting up a String in two halves.
+   *
+   * @param encryptedMessage the string to be split.
+   * @param half if 0 creates first half, if 1 creates second half.
+   * @return the respective half.
+   */
+  private String halfOfString(String encryptedMessage, int half) {
     String theHalf = "";
     for (int i= 0; i < encryptedMessage.length(); i++) {
       if (i % 2 == half) {
@@ -181,7 +187,17 @@ public class CaesearBreaking {
     return theHalf;
   }
 
-  public String breakCaesarKnowingKeys(String encryptedMessage) {
+
+  /**
+   * Method to break Caesar knowing the keys.
+   *
+   * @param encryptedMessage
+   * @param key1
+   * @param key2
+   * @param leftShift
+   * @return
+   */
+  public String breakCaesarKnowingKeys(String encryptedMessage, int key1, int key2, boolean leftShift) {
     String firstHalf = halfOfString(encryptedMessage, 0);
     String secondHalf = halfOfString(encryptedMessage, 1);
     CaesarImplementationOneKey caesarImplementationOneKey1 = new CaesarImplementationOneKey(key1, leftShift);
@@ -191,7 +207,14 @@ public class CaesearBreaking {
     return addToHalvesTogether(decryptedFirst, decryptedSecond);
   }
 
-  public String addToHalvesTogether(String decryptedFirst, String decryptedSecond) {
+  /**
+   * adding the halves together, with each even letter being taken from the first half and each
+   * uneven from the second half.
+   * @param decryptedFirst
+   * @param decryptedSecond
+   * @return the two Strings put together.
+   */
+  private String addToHalvesTogether(String decryptedFirst, String decryptedSecond) {
     String added = decryptedFirst + decryptedSecond;
     StringBuilder solution = new StringBuilder();
     int counterFirst = 0;
@@ -209,6 +232,13 @@ public class CaesearBreaking {
     return solutionAsString;
   }
 
+  /**
+   * breaks the caesar cipher based on the most frequent letter 'e'.
+   * Check method breakCaesarBasedOnFrequentLetters for more information.
+   *
+   * @param encryptedMessage the message to be decrypted.
+   * @return the message decrypted.
+   */
   public String breakCaesarForTwoKeysUsingMostFrequentLetter(String encryptedMessage) {
     String firstHalf = halfOfString(encryptedMessage, 0);
     String secondHalf = halfOfString(encryptedMessage, 1);

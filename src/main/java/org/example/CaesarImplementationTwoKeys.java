@@ -30,7 +30,7 @@ public class CaesarImplementationTwoKeys {
    * @param message - the message.
    * @return encoded message.
    */
-  public String makeCaesarWithTwoKeys(String message) {
+  public String makeCaesar(String message) {
     StringBuilder encryptedMessage = new StringBuilder();
     for (int i = 0; i < message.length(); i++) {
       Character c = message.charAt(i);
