@@ -157,20 +157,6 @@ public class CaesearBreaking {
   }
 
   /**
-   * reads a given file to a String.
-   *
-   * @param pathAsString path to the string in the file strucutre.
-   * @return the file as a String
-   * @throws IOException you know that
-   */
-  public String readFileToString(String pathAsString) throws IOException {
-    Path path = Path.of(pathAsString);
-    String content = Files.readString(path, StandardCharsets.US_ASCII);
-    StringBuilder stringBuilder = new StringBuilder(content);
-    return content;
-  }
-
-  /**
    * Splitting up a String in two halves.
    *
    * @param encryptedMessage the string to be split.

@@ -28,10 +28,10 @@ public class CryptographyMain {
     System.out.println(decrypted2);
 
     // breaking the message based on most frequent for file to be read in
-    String encrypted3 = breaking.readFileToString("res/mysteryTwoKeys.txt");
+    Helper helper = new Helper();
+    String encrypted3 = helper.readFileToString("res/mysteryTwoKeys.txt");
     String decrypted3 = breaking.breakCaesarForTwoKeysUsingMostFrequentLetter(encrypted3);
     System.out.println(decrypted3);
-
   }
 }
 
