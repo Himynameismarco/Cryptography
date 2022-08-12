@@ -32,8 +32,6 @@ public class VigenereBreaker {
 
         // put all chars on the dictionaries
         for (String lang : dictionaries.keySet()) {
-            System.out.println(lang);
-            System.out.println(mostCommonCharIn(dictionaries.get(lang)));
             mostCommonChars.put(lang, mostCommonCharIn(dictionaries.get(lang)));
         }
     }
@@ -95,7 +93,6 @@ public class VigenereBreaker {
                 maxC = c;
             }
         }
-        //System.out.println("most common char is " + maxC);
         return maxC;
     }
 
@@ -135,31 +132,17 @@ public class VigenereBreaker {
         char mostCommonCharForThis = mostCommonChars.get(language);
         HashSet<String> usedDict = dictionaries.get(language);
         int count  = 0;
-        System.out.println(mostCommonCharForThis);
         for (int keyLength = 1; keyLength <= 100; keyLength++) {
             int[] currentKeys = tryKeyLength(encrypted, keyLength, mostCommonCharForThis);
             VigenereCipher vC = new VigenereCipher(currentKeys);
             String decrypted = vC.decrypt(encrypted);
             int currentCount = countWords(decrypted, usedDict);
-            System.out.println("keyLength: " + keyLength);
             if (currentCount > maxWords) {
-                System.out.println("currentCount (" + currentCount + ") more than maxWords(" + maxWords + ").");
                 maxWords = currentCount;
                 bestDecryption = decrypted;
                 bestKeys = currentKeys;
             }
         }
-
-        System.out.println("Number of words for best decryption: " + maxWords);
-        if (bestKeys != null) {
-            System.out.println("Best keys for this decryption: ");
-            for (int k : bestKeys) {
-                System.out.println(k);
-            }
-            System.out.println("Best keys key length: " + bestKeys.length);
-        }
-
-        System.out.println(bestDecryption);
         return bestDecryption;
     }
 
@@ -171,7 +154,6 @@ public class VigenereBreaker {
         int bestCount = 0;
         for (String lang : dictionaries.keySet()) {
             currentBest = breakForLanguage(encrypted, lang);
-            //System.out.println(currentBest);
             currentCount = countWords(currentBest, dictionaries.get(lang));
             if (currentCount > bestCount) {
                 bestCount = currentCount;
@@ -179,8 +161,6 @@ public class VigenereBreaker {
                 finalBestLanguage = lang;
             }
         }
-        System.out.println("Final best is " + finalBestLanguage);
-        System.out.println(finalBest);
         return finalBest;
 
     }
@@ -195,12 +175,10 @@ public class VigenereBreaker {
      * @return a String with the character at @whichSlice-th index of slice.
      */
     public String sliceString(String message, int whichSlice, int totalSlices) {
-        //System.out.println("Message: " + message);
         StringBuilder sb = new StringBuilder();
         for (int i = whichSlice; i < message.length(); i += totalSlices){
             sb.append(message.charAt(i));
         }
-        //System.out.println("Slice " + whichSlice + ": " +sb.toString());
         return sb.toString();
     }
 
@@ -215,14 +193,10 @@ public class VigenereBreaker {
     public int[] tryKeyLength(String encrypted, int kLength, char mostCommon) {
         int[] key = new int[kLength];
         CaesarCracker cracker = new CaesarCracker(mostCommon);
-        //System.out.println("Most common char: " + mostCommon);
-        //System.out.println("Encrypted: " + encrypted);
-        //System.out.println("kLength: " + kLength);
 
         for (int i = 0; i < kLength; i++) {
             String slice = sliceString(encrypted, i, kLength);
             int aKey = cracker.getKey(slice);
-            //System.out.println("the key from getKey: " + aKey);
             key[i] = aKey;
         }
         return key;
@@ -240,7 +214,7 @@ public class VigenereBreaker {
         int[] keys = tryKeyLength(encryptedMessage, kLength, mostCommon);
         VigenereCipher vC = new VigenereCipher(keys);
         String decrypted = vC.decrypt(encryptedMessage);
-        //System.out.println(decrypted);
+        System.out.println(decrypted);
     }
 
     /**

@@ -11,11 +11,12 @@ These are simple ways of implementing and breaking two cryptographies:
   - VigenereBreaker --> is a class I wrote to break the Vigenere Cipher
 
 For the Vigenere Cipher, I thought it is a good idea to still use the code from Duke University to see that I am able to work with code someone else wrote.
-Additionally, I wrote the documentation for their code. 
-
+Additionally, I wrote the documentation for their code.
 
 
 Project done as part of the online course: 
 
 - Java Programming: Arrays, Lists, and Structured Data
+
+Additionally, there are the WebLogParser, LogAnalyzer and LogEntry classes. In contrast to other classes, I wrote for this course, I did not delete these, because they seemed especially useful to me and I might want to look them up later. 
 
