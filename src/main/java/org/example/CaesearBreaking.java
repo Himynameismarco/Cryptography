@@ -78,8 +78,8 @@ public class CaesearBreaking {
       counter++;
     }
 
-    System.out.println("The index of the most used letter is " + maxIndex + ". It is "
-        + ALPHABET_LOWER.charAt(maxIndex) + ".");
+    //System.out.println("The index of the most used letter is " + maxIndex + ". It is "
+    //    + ALPHABET_LOWER.charAt(maxIndex) + ".");
     return maxIndex;
 
   }
@@ -111,6 +111,24 @@ public class CaesearBreaking {
     CaesarImplementationOneKey caesarImplementationOneKey = new CaesarImplementationOneKey(delta, moveLeft);
     String solution = caesarImplementationOneKey.makeCaesar(encryptedMessage).toString();
     return solution;
+  }
+
+  public int returnKeyForSlice(String slice) {
+    int mostCommonIndex = getIndexOfMostFrequentLetter(slice);
+    Character characterToBaseEncryptionOn = ALPHABET_ORDERED_AFTER_FREQUENCY.charAt(0);
+    int indexOfCharInNormalAlphabet = ALPHABET_UPPER.indexOf(characterToBaseEncryptionOn);
+    int delta = 0;
+    boolean moveLeft;
+    if (indexOfCharInNormalAlphabet > mostCommonIndex) {
+      moveLeft = false;
+      delta = indexOfCharInNormalAlphabet - mostCommonIndex;
+    } else {
+      moveLeft = true;
+      delta = mostCommonIndex - indexOfCharInNormalAlphabet;
+    }
+    //System.out.println("delta is: " + delta);
+    return delta;
+
   }
 
 
