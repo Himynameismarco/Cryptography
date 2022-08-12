@@ -16,7 +16,7 @@ Additionally, I wrote the documentation for their code.
 
 Project done as part of the online course: 
 
-- Java Programming: Arrays, Lists, and Structured Data
+- [Java Programming: Arrays, Lists, and Structured Data](https://www.coursera.org/learn/java-programming-arrays-lists-data?)
 
 Additionally, there are the WebLogParser, LogAnalyzer and LogEntry classes. In contrast to other classes, I wrote for this course, I did not delete these, because they seemed especially useful to me and I might want to look them up later. 
 
