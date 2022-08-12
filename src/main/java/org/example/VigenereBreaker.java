@@ -146,6 +146,12 @@ public class VigenereBreaker {
         return bestDecryption;
     }
 
+    /**
+     * breaks the Vigenere cipher for all languages.
+     *
+     * @param encrypted the encrypted message.
+     * @return decrypted message.
+     */
     public String breakForAllLangs(String encrypted) {
         String currentBest;
         String finalBest = "";
